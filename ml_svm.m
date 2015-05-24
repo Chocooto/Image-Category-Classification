@@ -5,7 +5,7 @@
 addpath('utils');
 loadimages;
 % Train, Test partition
-percentage = [0.6];
+percentage = [0.2];
 rng(1);
 [trainingSets, testSets] = partition(imgSets, percentage, 'randomize');
 
@@ -31,7 +31,4 @@ testPredictions = predict(SVMMdl,testFeatures);
 Ctrain = confusionmat(trainingLabels,trainingPredictions);
 Ctest = confusionmat(testLabels,testPredictions);
 
-disp('Confusion matrix(Training)');
-disp(Ctrain);
-disp('Confusion matrix(Test)');
-disp(Ctest);
+dispConfusionMatrices(Ctrain,Ctest);
