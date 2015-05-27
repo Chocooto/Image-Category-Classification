@@ -10,7 +10,7 @@ function [features, varargout] = imageFeatureExtraction(I, DetectorName, Descrip
 % 'SURF':Speeded up robust features
 % 'BRISK':Binary Robust Invariant Scalable Keypoints
 % 'MSER':Maximally stable extremal regions
-% DescriptorName: 'HOG','Auto','BRISK','FREAK','SURF','Block'
+% DescriptorName: 'HOG','SURF'
 % 'HOG':Histogram of oriented gradients. If this method is used, the 
 % DescriptorParams should have a field named 'BlockSize'. Otherwise, the
 % DsecriptorParams should have a field named 'SURFSize'

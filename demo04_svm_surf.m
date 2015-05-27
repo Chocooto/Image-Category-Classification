@@ -1,9 +1,9 @@
-%% Image Classification - Preprocessing
+%% Image Classification
+% Bag of Visual Words(SURF + kmeans) + SVM
 % Data set: Caltech 101
 % Load Images
 
 % Huayu Zhang, May 2015
-
 addpath('./utils');
 addpath('./imagefeatures');
 run(fullfile('vlfeat','toolbox','vl_setup.m'));
@@ -19,7 +19,7 @@ NumberSelect = 3;
 % ClassIndices = randperm(size(classes,1),NumberSelect);
 ClassIndices = [2, 5, 7];
 % feature extraction
-BoWParams = struct('DetectorName','SURF','DescriptorName','Auto',...
+BoWParams = struct('DetectorName','SURF','DescriptorName','SURF',...
     'DescriptorParams',struct('SURFSize',128),'k',200,'MaxFeatures',200,'type','tf');
 % SVM Design
 percentage = [0.2]; % percentage for training

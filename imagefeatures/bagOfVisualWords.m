@@ -1,14 +1,14 @@
 function [trainingFeatures, trainingLabels, testingFeatures, ...
-    testingLabels] = bagOfVisualWords(trainingSets,testingSets,BoWParams)
+    testingLabels, C] = bagOfVisualWords(trainingSets,testingSets,BoWParams)
 % BAGOFVISUALWORDS
 % ------------------------------------------------------------
-% [trainingFeatures, trainingLabels, testingFeatures, testingLabels] = ...
+% [trainingFeatures, trainingLabels, testingFeatures, testingLabels, C] = ...
 % bagOfVisualWords(imgSets,testingSets,BoWParams)
 % imgSets : image sets
 % BoWParams: Bag of Words parameters. struct
 % (DetectorName,DescriptorName,DescriptorParams,MaxFeatures,k,type)
 % DetectorName:'FAST','MinEigen','Harris','SURF','BRISK','MSER'
-% DescriptorName:'HOG','Auto','BRISK','FREAK','SURF','MSER'
+% DescriptorName:'HOG','SURF'
 % k:Number of clusters
 % MaxFeatures: Max number of features for each image
 % type:'tf'|'tfidf'. 'tf':term frequency, tfidf:term frequency inverse
