@@ -7,7 +7,7 @@ function [trainingFeatures, trainingLabels, testingFeatures, ...
 % imgSets : image sets
 % BoWParams: Bag of Words parameters. struct
 % (DetectorName,DescriptorName,DescriptorParams,MaxFeatures,k,type)
-% DetectorName:'FAST','MinEigen','Harris','SURF','BRISK','MSER'
+% DetectorName:'FAST','MinEigen','Harris','SURF','BRISK'
 % DescriptorName:'HOG','SURF'
 % k:Number of clusters
 % MaxFeatures: Max number of features for each image

@@ -30,22 +30,16 @@ I utilize some third party toolboxes.
 
 The _rootFolder_ needs changing to fit the location of the Caltech101 data set.
 
-The classes can be chosen arbitrarily by tuning _ClassIndices_. In the demo, I choose classes 'Faces','Airplane' and 'Motorbike'.
+The classes can be chosen arbitrarily by tuning _ClassIndices_. In the demo, I choose 6 classes 'BACKGROUND_Google',Faces','Leopards','airplanes','watch' and 'Motorbikes'.
 
-The current package has 6 demos,
+The current package has 4 demos,
 <ol>
-    <li> __demo01_svm_hog.m__ : HOG + SVM </li>
-    <li> __demo02_svm_hog_emd.m__ : HOG + EMD-KPCA + SVM </li>
-    <li> __demo03_svm_hog_emd_vload.m__: HOG + EMD-KPCA (loading pre-computed kernel matrix) + SVM
-    </li>
-    <li> __demo04_svm_surf.m__ : SURF + SVM </li>
-    <li> __demo05_svm_surf_emd.m__ : SURF + EMD-KPCA + SVM </li>
-    <li> __demo06_svm_surf_emd_vload.m__: SURF + EMD-KPCA (loading pre-computed kernel matrix) + SVM
-    </li>
+    <li> <strong>demo6_svm_hog.m</strong> : HOG + SVM </li>
+    <li> <strong>demo6_svm_hog_emd.m</strong> : HOG + EMD-KPCA + SVM </li>
+    <li> <strong>demo6_svm_surf.m</strong> : SURF + SVM </li>
+    <li> <strong>demo6_svm_surf_emd.m</strong> : SURF + EMD+KPCA + SVM </li>
 </ol>
 
-The computation of EMD kernel matrix is extremely time-comsuming, so it is wise to pre-compute and store it.
-
-__svm_exp.m__ is a test script, demo01,demo02(demo04,demo05) will be executed for 10(5) times. We then calculate the mean and standard deviation.
+<strong>demo6_fillyourclassifier_hog.m</strong> and <strong>demo6_fillyourclassifier_surf.m</strong> are two scripts containing the classification frame, but you need to configure your classifier in them. <strong>hog</strong> and <strong>surf</strong> represent two feature descriptors.
 
 Matlab R2014B, Windows 7 OS* 64-bit.

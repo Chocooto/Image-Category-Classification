@@ -1,10 +1,12 @@
 %% Image Classification
-% Bag of Visual Words(HOG + kmeans) + SVM
+% Bag of Visual Words(HOG + kmeans) + Your Classifier
 % Data set: Caltech 101
 % Load Images
 
-% Huayu Zhang, May 2015
+% In this script, you need to incorporate your classifier. See details in 
+% line 29~32 and line 45~46.
 
+% Huayu Zhang, May 2015
 addpath('./utils');
 addpath('./imagefeatures');
 run(fullfile('vlfeat','toolbox','vl_setup.m'));
@@ -16,16 +18,19 @@ istrim = true;
 % random 
 rng(1);
 % classes
-NumberSelect = 3; 
+NumberSelect = 6; 
 % ClassIndices = randperm(size(classes,1),NumberSelect);
-ClassIndices = [2, 5, 7];
+ClassIndices = [1,2,4,5,7,96]; % 200+
 % feature extraction
 BoWParams = struct('DetectorName','SURF','DescriptorName','HOG',...
     'DescriptorParams',struct('BlockSize',[4,4]),'k',200,'MaxFeatures',200,'type','tf');
-% SVM Design
-percentage = [0.2]; % percentage for training
-svmOptions = templateSVM('BoxConstraint', 1, 'KernelFunction', 'linear',...
-    'standardize',1);
+
+%% Bayes Design
+percentage = [0.4]; % percentage for training
+% Generate a classifier template here. For example,
+% bayesOptions = templateNaiveBayes('DistributionNames', 'kernel', 'Kernel', 'normal');
+% svmOptions = templateSVM('BoxConstraint', 1, 'KernelFunction', 'linear',...
+%    'standardize',1);
 
 %% Load Images
 imgSets = loadImages(rootFolder, ClassIndices, istrim);
@@ -37,26 +42,15 @@ dispSamples(imgSets, 1); % display sample
 % feature extration
 [trainingFeatures, trainingLabels, testingFeatures, ...
     testingLabels] = bagOfVisualWords(trainingSets,testingSets,BoWParams);
-fontsize = 20;
-Nc = numel(unique(trainingLabels));
-for c = 1:Nc
-    figure(c);
-    bar(trainingFeatures((c-1)*numel(trainingLabels)/Nc+1,:));
-    xlabel('Visual word index','FontSize',fontsize);
-    ylabel('Frequency of occurrence','FontSize',fontsize);
-    xlim([0,size(trainingFeatures,2)]);
-    set(gca,'FontSize',fontsize);
-    set(gcf,'color','white');
-end
-% SVM training
-SVMMdl = fitcecoc(trainingFeatures, trainingLabels,'Learners',svmOptions);
+% Configure yourClassifier in line 29~32
+BMdl = fitcecoc(trainingFeatures, trainingLabels,'Learners',yourClassifier);
 % cross validation
-CVMdl = crossval(SVMMdl);
+CVMdl = crossval(BMdl);
 oosLoss = kfoldLoss(CVMdl);
 fprintf('Cross Validation Error: %f.\n',oosLoss);
 % prediction
-trainingPredictions = predict(SVMMdl,trainingFeatures);
-testingPredictions = predict(SVMMdl,testingFeatures);
+trainingPredictions = predict(BMdl,trainingFeatures);
+testingPredictions = predict(BMdl,testingFeatures);
 % confusion matrix
 Ctrain = confusionmat(trainingLabels,trainingPredictions);
 Ctest = confusionmat(testingLabels,testingPredictions);
